@@ -10,6 +10,7 @@ class UsersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonScreen(
+      viewModel: _viewModel,
       body: Observer(
         builder: (_) {
           if (_viewModel.userList.isEmpty) {
