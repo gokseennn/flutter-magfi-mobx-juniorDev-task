@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:magfi_dev_task/feature/users/model/user.dart';
 
 class UserListCardItem extends StatelessWidget {
-  const UserListCardItem({super.key});
-
+  const UserListCardItem({super.key, required this.user});
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,16 +26,17 @@ class UserListCardItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Leanne Graham",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    user.name,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Sincere@april.biz",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    user.email,
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ],
               ),
@@ -48,25 +50,25 @@ class UserListCardItem extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: const Text(
-                  "Romaguera-Crona",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                child: Text(
+                  user.company.name,
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
                 ),
               )
             ],
           ),
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Gwenborough",
-                style: TextStyle(
+                user.address.city,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text("hildegard.org",
-                  style: TextStyle(
+              Text(user.website,
+                  style: const TextStyle(
                     fontSize: 16,
                   )),
             ],
