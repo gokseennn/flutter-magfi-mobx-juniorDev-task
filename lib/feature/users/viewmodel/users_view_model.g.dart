@@ -13,16 +13,24 @@ mixin _$UsersViewModel on _UsersViewModel, Store {
       Atom(name: '_UsersViewModel.userList', context: context);
 
   @override
-  ObservableList<User> get userList {
+  List<User> get userList {
     _$userListAtom.reportRead();
     return super.userList;
   }
 
   @override
-  set userList(ObservableList<User> value) {
+  set userList(List<User> value) {
     _$userListAtom.reportWrite(value, super.userList, () {
       super.userList = value;
     });
+  }
+
+  late final _$onInitAsyncAction =
+      AsyncAction('_UsersViewModel.onInit', context: context);
+
+  @override
+  Future<void> onInit() {
+    return _$onInitAsyncAction.run(() => super.onInit());
   }
 
   late final _$getAllUsersAsyncAction =

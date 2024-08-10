@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Basit bir yüklenme görüntüsü için Shimmer, iyileştirme yapılabilir ui açısından
 class ShimmerList extends StatefulWidget {
   const ShimmerList({super.key});
 

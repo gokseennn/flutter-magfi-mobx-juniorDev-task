@@ -26,19 +26,24 @@ class CommonScreen<T extends BaseViewModel> extends StatelessWidget {
               future: viewModel.dataFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
+                  //Eğer sayfa yükleme durumunda ise Shimmer göstererek kullanıcıyı bilgilendiriyor
                   return const ShimmerList();
-                } else if (snapshot.hasError) {
+                } else if (viewModel.errorMessage != "") {
+                  //[errorMessage] fonksiyonu sadece hata durumunda dolu olduğu için hata varsa ekrana hata mesajı ve yeniden
+                  //çağırma fonksiyonu için buton ekleniyor
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Bir Hata Oluştu",
+                          "Bir Hata Oluştu ", //${viewModel.errorMessage} bu şekilde error mesajıda gösterilebilir tercih meselesi
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                         ElevatedButton(
-                            onPressed: () {}, child: const Text("Yeniden Dene"))
+                            onPressed: viewModel
+                                .refreshData, //[BaseViewModel] içindeki refreshdata ile sayfa tekrar yükleniyor
+                            child: const Text("Yeniden Dene"))
                       ],
                     ),
                   );

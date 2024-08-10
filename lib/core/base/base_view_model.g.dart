@@ -9,22 +9,6 @@ part of 'base_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$BaseViewModel on _BaseViewModel, Store {
-  late final _$errorMessageAtom =
-      Atom(name: '_BaseViewModel.errorMessage', context: context);
-
-  @override
-  String get errorMessage {
-    _$errorMessageAtom.reportRead();
-    return super.errorMessage;
-  }
-
-  @override
-  set errorMessage(String value) {
-    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
-      super.errorMessage = value;
-    });
-  }
-
   late final _$dataFutureAtom =
       Atom(name: '_BaseViewModel.dataFuture', context: context);
 
@@ -38,6 +22,22 @@ mixin _$BaseViewModel on _BaseViewModel, Store {
   set dataFuture(ObservableFuture<dynamic>? value) {
     _$dataFutureAtom.reportWrite(value, super.dataFuture, () {
       super.dataFuture = value;
+    });
+  }
+
+  late final _$errorMessageAtom =
+      Atom(name: '_BaseViewModel.errorMessage', context: context);
+
+  @override
+  String get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
     });
   }
 
@@ -57,15 +57,34 @@ mixin _$BaseViewModel on _BaseViewModel, Store {
     return _$runWithLoadingAsyncAction.run(() => super.runWithLoading<T>(task));
   }
 
+  late final _$refreshDataAsyncAction =
+      AsyncAction('_BaseViewModel.refreshData', context: context);
+
+  @override
+  Future<void> refreshData() {
+    return _$refreshDataAsyncAction.run(() => super.refreshData());
+  }
+
   late final _$_BaseViewModelActionController =
       ActionController(name: '_BaseViewModel', context: context);
 
   @override
-  void handleError(dynamic error) {
+  void handleError(dynamic message) {
     final _$actionInfo = _$_BaseViewModelActionController.startAction(
         name: '_BaseViewModel.handleError');
     try {
-      return super.handleError(error);
+      return super.handleError(message);
+    } finally {
+      _$_BaseViewModelActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void handleDioError(DioException error) {
+    final _$actionInfo = _$_BaseViewModelActionController.startAction(
+        name: '_BaseViewModel.handleDioError');
+    try {
+      return super.handleDioError(error);
     } finally {
       _$_BaseViewModelActionController.endAction(_$actionInfo);
     }
@@ -74,8 +93,8 @@ mixin _$BaseViewModel on _BaseViewModel, Store {
   @override
   String toString() {
     return '''
-errorMessage: ${errorMessage},
-dataFuture: ${dataFuture}
+dataFuture: ${dataFuture},
+errorMessage: ${errorMessage}
     ''';
   }
 }

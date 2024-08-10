@@ -10,25 +10,29 @@ abstract class _UsersViewModel extends BaseViewModel with Store {
   final UserService _userService;
 
   _UsersViewModel({UserService? userService})
-      : _userService = userService ?? UserService();
+      : _userService = userService ??
+            UserService(); //[UserService]'in yalnızca 1 kere oluşturulmasını sağlıyor
 
   @observable
-  ObservableList<User> userList = ObservableList<User>();
+  List<User> userList = ObservableList<User>();
 
+  @action
   @override
   Future<void> onInit() async {
     await getAllUsers();
+    // Diğer fonksiyonların da kullanılabilir olması için, temel bir onInit fonksiyonu oluşturdum.
+    // Bu fonksiyon, sayfa her açıldığında otomatik olarak çalışacak.
+    // Detaylar için [BaseViewModel] sınıfındaki ilgili fonksiyonu inceleyebilirsiniz.
   }
 
   @action
   Future<void> getAllUsers() async {
     final users = await _userService.fetchAllUser();
     runInAction(() {
-      userList.clear();
-      userList.addAll(users);
-      if (userList.isEmpty) {
-        handleError('Kullanıcı listesi boş');
+      if (userList.isNotEmpty) {
+        userList.clear();
       }
+      userList.addAll(users);
     });
   }
 }

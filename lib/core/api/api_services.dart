@@ -10,7 +10,8 @@ class ApiServices {
     return _instance!;
   }
 
-  final String _baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String _baseUrl =
+      'https://jsonplaceholder.typicode.com'; //Environment ile alınabilir ama şuanlık tek url olduğu için böyle yaptım
   final Dio dio = Dio();
 
   ApiServices._init() {
