@@ -9,7 +9,7 @@ class UsersViewModel = _UsersViewModel with _$UsersViewModel;
 abstract class _UsersViewModel extends BaseViewModel with Store {
   UserService userService = UserService();
   _UsersViewModel() {
-    getAllUsers();
+    runWithLoading(() => init());
   }
 
   @observable
@@ -18,5 +18,12 @@ abstract class _UsersViewModel extends BaseViewModel with Store {
   @action
   Future<void> getAllUsers() async {
     userList = await userService.fetchAllUser();
+    if (userList.isEmpty) {
+      print("");
+    }
+  }
+
+  Future<void> init() async {
+    await getAllUsers();
   }
 }

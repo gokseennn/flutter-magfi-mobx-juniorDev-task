@@ -29,7 +29,7 @@ mixin _$BaseViewModel on _BaseViewModel, Store {
       AsyncAction('_BaseViewModel.runWithLoading', context: context);
 
   @override
-  Future<T> runWithLoading<T>(Future<T> Function() task) {
+  Future<T?> runWithLoading<T>(Future<T> Function() task) {
     return _$runWithLoadingAsyncAction.run(() => super.runWithLoading<T>(task));
   }
 

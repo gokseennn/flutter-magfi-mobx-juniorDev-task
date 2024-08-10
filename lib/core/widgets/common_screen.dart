@@ -26,29 +26,7 @@ class CommonScreen<T extends BaseViewModel> extends StatelessWidget {
               future: viewModel.dataFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return ListView.builder(
-                    itemCount: shimmerItemCount,
-                    itemBuilder: (context, index) {
-                      return ShimmerWidget(
-                        child: ListTile(
-                          leading: const CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Colors.white,
-                          ),
-                          title: Container(
-                            width: double.infinity,
-                            height: 16,
-                            color: Colors.white,
-                          ),
-                          subtitle: Container(
-                            width: double.infinity,
-                            height: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                      );
-                    },
-                  );
+                  return const ShimmerList();
                 } else if (snapshot.hasError) {
                   return Center(
                       child: Text('Bir hata oluştu: ${snapshot.error}'));

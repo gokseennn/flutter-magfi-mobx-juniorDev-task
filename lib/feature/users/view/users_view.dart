@@ -13,16 +13,12 @@ class UsersView extends StatelessWidget {
       viewModel: _viewModel,
       body: Observer(
         builder: (_) {
-          if (_viewModel.userList.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return ListView.builder(
-              itemCount: _viewModel.userList.length,
-              itemBuilder: (context, index) {
-                return UserListCardItem(user: _viewModel.userList[index]);
-              },
-            );
-          }
+          return ListView.builder(
+            itemCount: _viewModel.userList.length,
+            itemBuilder: (context, index) {
+              return UserListCardItem(user: _viewModel.userList[index]);
+            },
+          );
         },
       ),
     );
