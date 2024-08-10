@@ -12,12 +12,17 @@ class UserService extends IUserService {
 
   @override
   Future<List<User>> fetchAllUser() async {
-    final response = await apiServices.get("");
-    print(response.statusCode);
-    if (response.statusCode == HttpStatus.ok) {
-      final data = response.data;
-      if (data is List) return data.map((e) => User.fromJson(e)).toList();
+    try {
+      final response = await apiServices.get("/users");
+      if (response.statusCode == HttpStatus.ok) {
+        final data = response.data;
+        if (data is List) return data.map((e) => User.fromJson(e)).toList();
+      }
+      throw Exception('Veri alınamadı: ${response.statusCode}');
+    } catch (e) {
+      // Exception mesajını logla ve ekranda göstermeden yeniden fırlat
+      print('Beklenmeyen bir hata oluştu: $e');
+      throw Exception('Beklenmeyen bir hata oluştu');
     }
-    return [];
   }
 }

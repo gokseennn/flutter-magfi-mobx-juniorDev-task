@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
 class ApiServices {
@@ -12,7 +10,7 @@ class ApiServices {
     return _instance!;
   }
 
-  final String _baseUrl = 'https://jsonplaceholder.typicode.com/users';
+  final String _baseUrl = 'https://jsonplaceholder.typicode.com';
   final Dio dio = Dio();
 
   ApiServices._init() {

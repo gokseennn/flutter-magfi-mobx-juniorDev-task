@@ -29,7 +29,19 @@ class CommonScreen<T extends BaseViewModel> extends StatelessWidget {
                   return const ShimmerList();
                 } else if (snapshot.hasError) {
                   return Center(
-                      child: Text('Bir hata oluştu: ${snapshot.error}'));
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Bir Hata Oluştu",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {}, child: const Text("Yeniden Dene"))
+                      ],
+                    ),
+                  );
                 } else {
                   return body; // Veri başarıyla yüklendiğinde body widget'ı gösterilecek
                 }

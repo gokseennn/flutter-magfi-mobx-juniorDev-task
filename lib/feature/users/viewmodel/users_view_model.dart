@@ -7,23 +7,28 @@ part 'users_view_model.g.dart';
 class UsersViewModel = _UsersViewModel with _$UsersViewModel;
 
 abstract class _UsersViewModel extends BaseViewModel with Store {
-  UserService userService = UserService();
-  _UsersViewModel() {
-    runWithLoading(() => init());
-  }
+  final UserService _userService;
+
+  _UsersViewModel({UserService? userService})
+      : _userService = userService ?? UserService();
 
   @observable
-  List<User> userList = [];
+  ObservableList<User> userList = ObservableList<User>();
+
+  @override
+  Future<void> onInit() async {
+    await getAllUsers();
+  }
 
   @action
   Future<void> getAllUsers() async {
-    userList = await userService.fetchAllUser();
-    if (userList.isEmpty) {
-      print("");
-    }
-  }
-
-  Future<void> init() async {
-    await getAllUsers();
+    final users = await _userService.fetchAllUser();
+    runInAction(() {
+      userList.clear();
+      userList.addAll(users);
+      if (userList.isEmpty) {
+        handleError('Kullanıcı listesi boş');
+      }
+    });
   }
 }

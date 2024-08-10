@@ -13,13 +13,13 @@ mixin _$UsersViewModel on _UsersViewModel, Store {
       Atom(name: '_UsersViewModel.userList', context: context);
 
   @override
-  List<User> get userList {
+  ObservableList<User> get userList {
     _$userListAtom.reportRead();
     return super.userList;
   }
 
   @override
-  set userList(List<User> value) {
+  set userList(ObservableList<User> value) {
     _$userListAtom.reportWrite(value, super.userList, () {
       super.userList = value;
     });
