@@ -1,16 +1,33 @@
-# magfi_dev_task
+Amaç:
+Bu görevin amacı, adayın Flutter'da MobX ve Dio kütüphanelerini kullanarak asenkron veri alma ve yönetme yeteneklerini değerlendirmektir. Adaydan, bir API'den veri çekip bu veriyi uygulama ekranında göstermesi beklenmektedir.
 
-A new Flutter project.
+Görev Detayları:
 
-## Getting Started
+Proje Kurulumu:
 
-This project is a starting point for a Flutter application.
+Flutter projesi oluşturun.
+Projede MobX ve Dio kütüphanelerini kurun ve yapılandırın.
 
-A few resources to get you started if this is your first Flutter project:
+API Seçimi:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Açık bir API seçin (örneğin, JSONPlaceholder ya da OpenWeather) ve seçtiğiniz API'den veri çekin.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Veri Alma:
+
+Dio kullanarak seçtiğiniz API'den veri almak için bir servis sınıfı oluşturun.
+Alınan veriyi MobX ile yönetmek için bir store oluşturun.
+
+Veri Gösterimi:
+
+Uygulama arayüzünde, API'den alınan veriyi liste veya kart yapısında gösterin.
+Her veri öğesi için başlık ve açıklama gibi detayları ekrana basın.
+
+Kullanıcı Deneyimi:
+
+Veri alınırken kullanıcıya bir yükleniyor göstergesi gösterin.
+Veri alma işlemi tamamlandığında bu göstergeyi kaldırın.
+
+Ekstra Özellikler (Opsiyonel):
+
+Hata durumları için kullanıcıya bir uyarı gösterin.
+Veriyi yenilemek için bir "Yenile" butonu ekleyin.
